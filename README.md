@@ -1,2 +1,2 @@
 # lavender
-Py scripts to auto create some stuff in trello board
+AWS playground and SAA-C03 practices
