@@ -1,0 +1,22 @@
+name: Deploy Test Server Mannual
+run-name: ${{ github.actor }} is deploying via GitHub Actions
+on: workflow_dispatch
+jobs:
+  test-tilde:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Tilde Expansion
+        run: |
+          mkdir -pv ~/.ssh
+          echo "${{ secrets.ABC }}"
+          echo "${{ secrets.ABC }}" > ~/.ssh/ansible_ssh_key.pub
+          ls -la ~/.ssh || echo "Directory does not exist"
+
+          cat ~/.ssh/ansible_ssh_key.pub || echo "file does not exist"
+
+      - name: Step 1 - Set output
+        id: step_one
+        run: echo "test_output=ABC" >> $GITHUB_OUTPUT
+
+      - name: display output
+        run: echo "Output value ${{ steps.step_one.outputs.test_output }}" >> $GITHUB_STEP_SUMMARY
